@@ -1,2 +1,2 @@
 #!/bin/bash
-for file in $(find . -maxdepth 1 -name "*.html" -newer ../); do cp -u "$file" ../; done
+for file in $(find . -maxdepth 1 -name "*.html" -newer ../) do cp -u "$file" ../ done
