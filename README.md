@@ -1,1 +1,1 @@
-This repository is for my foundation ALX SE projects 
+0x0A. Configuration management
