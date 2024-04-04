@@ -1,1 +1,1 @@
-0x10. HTTPS SSL
+Bash and Scriptig
