@@ -1,32 +1,23 @@
 
 #!/usr/bin/python3
-"""For a given employee ID, returns information about
-their TODO list progress"""
-
+"""
+    Uses the fake API to get an employer
+"""
 import requests
-import sys
+from sys import argv
 
 if __name__ == "__main__":
-
-        userId = sys.argv[1]
-            user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
-                                            .format(userId))
-
-                name = user.json().get('name')
-
-                    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-                        totalTasks = 0
-                            completed = 0
-
-                                for task in todos.json():
-                                            if task.get('userId') == int(userId):
-                                                            totalTasks += 1
-                                                                        if task.get('completed'):
-                                                                                            completed += 1
-
-                                                                                                print('Employee {} is done with tasks({}/{}):'
-                                                                                                                  .format(name, completed, totalTasks))
-
-                                                                                                    print('\n'.join(["\t " + task.get('title') for task in todos.json()
-                                                                                                                  if task.get('userId') == int(userId) and task.get('completed')]))
+    id_em = argv[1]
+    url_employ = "https://jsonplaceholder.typicode.com/users/{}".format(id_em)
+    url_todos = url_employ + "/todos"
+    r_employ = requests.get(url_employ).json()
+    r_todos = requests.get(url_todos).json()
+    name = r_employ.get("name")
+    total_num_task = r_todos
+    done_task = [task for task in r_todos if task.get("completed")]
+    output = "Employee {} is done with tasks({}/{}):".format(
+                name, len(done_task), len(total_num_task))
+    for task in done_task:
+        output += "\n\t " + task.get("title")
+    print(output)
 
